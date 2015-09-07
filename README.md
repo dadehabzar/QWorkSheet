@@ -1,1 +1,3 @@
-# QWorksheet
+ QWorksheet is a free opensource Qt C++ widget to display table of data in a formatted sheet
+ It reads and writes text, csv, xls, xlsx, ... data files
+...
