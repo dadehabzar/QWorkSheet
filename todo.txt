@@ -1,0 +1,18 @@
+
+//high priority
+7-  move widgets & their pointers from storage.cpp to qworksheet.cpp
+8-  load from saved files (using open file dialogue) to worksheet
+
+//low priority
+1-  Create QList of better colors for coulumns background
+2-  slot for translate to farsi/arabic/english/...
+3-  save as binary
+4-  processbar to show save process of huge files (while disable save button)
+5-  define new filename (add date & time to the first selected filename) for each new saved worksheet in xls, csv or binary file
+6-  remove unwanted character ' in xls files ? use open source libec ...
+7-  insert g_info_string in the first line of xls file. insert date & time in the second line
+
+
+//verylow priority
+1-  add Microsoft Excell commands to function/slot list (same as QExcel)
+
