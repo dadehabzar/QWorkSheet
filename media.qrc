@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>media/standardbutton-open-128.png</file>
+        <file>media/document-save-128.png</file>
+    </qresource>
+</RCC>
