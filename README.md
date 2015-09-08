@@ -6,6 +6,11 @@ It can be used widely in data acquisition (DAQ) software packages next to Charts
 
 Work on project is in progress ...
 
+-----------------------------------------------------------------
+Version 0.70
+
+-----------------------------------------------------------------
+
 www.QtGroup.ir
 
 info [at] QtGroup [dot] ir
