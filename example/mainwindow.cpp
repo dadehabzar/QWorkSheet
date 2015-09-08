@@ -6,20 +6,15 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-
-//QPointer<Testlib> libt;
-
-    link = new QWorkSheet();
-   //link->startshow();
-
     ui->setupUi(this);
 
-    //libb->startshow();
-
-    connect(this,SIGNAL(sigAddSheets(QStringList)),link,SLOT(slotAddSheets(QStringList)));
-    connect(this,SIGNAL(sigAddColumns(QString, QStringList )),link,SLOT(slotAddColumns(QString , QStringList)));
+    link = new QWorkSheet();
+    connect(this,SIGNAL(sigAddSheets(QStringList,QStringList,QStringList,QStringList,QList<int>, QList<bool> , QList<bool> ,
+                                     QList<bool> , QList<bool> )),link,
+            SLOT(slotAddSheets(QStringList,QStringList,QStringList,QStringList,QList<int>, QList<bool> , QList<bool> ,
+                               QList<bool> , QList<bool> )));
+    connect(this,SIGNAL(sigAddColumns(QString , QStringList  ,QList<QColor> )),link,SLOT(slotAddColumns(QString , QStringList  ,QList<QColor> )));
     connect(this,SIGNAL(sigAddRows(QString , QString , QStringList  )),link,SLOT(slotAddRows(QString , QString , QStringList )));
-    //link->show();
 
     ui->tabWidget->addTab(link,"Qworksheet");
 }
@@ -29,92 +24,63 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::add()
+
+void MainWindow::on_pushButton_addSheets_clicked()
 {
-    qDebug()<< "ok";
+    QStringList sheet_names;
+    sheet_names<< "n1" << "n2" << "n3" << "n4"<< "n5"<< "n6";
+    QStringList titles;
+    titles<< "t1" << "t2" << "t3" << "t4"<< "t5"<< "t6";
+    QStringList x_axis_labels;
+    x_axis_labels<< "x1" << "" << "" << ""<< ""<< "";
+    QStringList y_axis_labels;
+    y_axis_labels<< "y1" << "y2" << "y3" << "y4"<< "y5"<< "y6";
+    QList<int> real_display_precision ;
+    real_display_precision<< 1 << 1 << 1 << 1<< 1<< 1;
+    QList<bool> have_x_axis;
+    have_x_axis << true << false << false << false << false << false;
+    QList<bool> have_y_axis;
+    have_y_axis << true << true << true << true << true << true;
+    QList<bool> reverse_x_axis;
+    reverse_x_axis << false << false << false << false << false << false;
+    QList<bool> reverse_y_axis;
+    reverse_y_axis << false << false << false << false << false << false;
+
+    emit sigAddSheets(sheet_names,titles,x_axis_labels,y_axis_labels,real_display_precision,have_x_axis
+                      ,have_y_axis,reverse_x_axis,reverse_y_axis);
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButton_addCoulms_clicked()
 {
     QStringList str;
-    str << "1" << "2" << "3" << "4"<< "ali"<< "sadegh";
-    emit sigAddSheets(str);
-}
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    QStringList str;
-//    QList<QColor> c;
     QList<int> i;
-    i << 10 <<10 << 10 << 10 <<10;
-//    c .append(Qt::red);
-//    c .append(Qt::red);
-//    c .append(Qt::red);
-//    c .append(Qt::red);
-//    c .append(Qt::red);
-//    c .append(Qt::green);
-//    c .append(Qt::yellow);
-//c .append(Qt::yellow);
-//c .append(Qt::yellow);
-//c .append(Qt::yellow);
-//c .append(Qt::yellow);
+    i << 10 <<10 << 10 << 10 <<10 << 12;
+    QList<QColor> c;
+    c .append(Qt::red);
+    c .append(Qt::red);
+    c .append(Qt::red);
+    c .append(Qt::red);
+    c .append(Qt::green);
+    c .append(Qt::yellow);
 
-    str << "1"  << "2" << "3" << "4" << "5";
-    emit sigAddColumns("3",str);
-        emit sigAddColumns("2",str);
-    emit sigAddColumns("1",str);
-   // QStringList str2;
-    //str2 << "11"  << "22" << "33" << "4c4" << "55" <<"ggugyuyt" << "ghjghjhg";
-    //emit sigAddColumns("3",str2,c);
+    str << "c1"  << "c2" << "c3" << "c4" << "c5" << "c6";
+    emit sigAddColumns("n1",str,c);
+    emit sigAddColumns("n2",str,c);
+    emit sigAddColumns("n3",str,c);
 }
 
-void MainWindow::on_pushButton_3_clicked()
+void MainWindow::on_pushButton_addRows_clicked()
 {
-
-
     QApplication::processEvents();
     QList<QString> str;
-    str << "1r " <<"2r" << "7r" << "4r"  <<"5r" << "5555";
-//    emit  sigAddRows("1","Mohsen",str);
-//    emit  sigAddRows("1","1c",str);
-    emit  sigAddRows("3","1",str);
-    emit  sigAddRows("3","2",str);
-     QList<QString> str2;
-     str2<< "test";
-     emit  sigAddRows("3","4",str2);
-     emit  sigAddRows("3","5",str2);
-     emit  sigAddRows("3","3",str2);
-emit  sigAddRows("2","2",str);
-
-   // QList<QString> str2;
-    //str2 << "1 " <<"2" << "7" << "4" <<"5dtgdfgdfgdfgdfgdfgdfgdfgdfg" ;
-   // emit sigAddRows("3",str2);
-
-
+    str << "1r " <<"2r" << "7r" << "4r"  <<"5r" << "6r";
+    emit  sigAddRows("n3","c1",str);
+    emit  sigAddRows("n3","c2",str);
+    QList<QString> str2;
+    str2<< "test";
+    emit  sigAddRows("n3","c4",str2);
+    emit  sigAddRows("n3","c5",str2);
+    emit  sigAddRows("n3","c3",str2);
+    emit  sigAddRows("n2","c6",str);
 }
 
-void MainWindow::on_pushButton_4_clicked()
-{
-
-}
-
-
-
-void MainWindow::on_checkBox_stateChanged(int arg1)
-{
-
-}
-
-
-
-void MainWindow::on_pushButton_5_clicked()
-{
-   // QString fileName = QFileDialog::getSaveFileName(this, tr("Excel file"), qApp->applicationDirPath (),
-    //tr("Excel Files (*.bin)"));
-    QString fileName ="";
-    QStringList str;
-    str << "92"  ;
-    emit sigAddColumns("3",str);
-    //link->test_binary(fileName);
-
-}
