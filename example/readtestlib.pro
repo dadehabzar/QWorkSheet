@@ -10,7 +10,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = readtestlib
 TEMPLATE = app
-        LIBS += .\qworksheet\release\qworksheet.lib
+        LIBS += .\qworksheet\release\qworksheet.lib # Windows msvc
+        # LIBS += .\qworksheet\release\libqworksheet.a # Mingw or GCC 
         LIBS += -lsetupapi -ladvapi32 -luser32
 SOURCES += main.cpp\
         mainwindow.cpp
